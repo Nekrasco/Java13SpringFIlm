@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить режиссёра к фильму</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <form style="max-width: 50vw" method="POST" th:action="@{/films/addDirector}" th:object="${idFilmDirectorDTO}">
+        <div class="mb-3">
+            <label for="filmId" class="form-label">ID фильма</label>
+            <input name="filmId" type="text" class="form-control" id="filmId" th:value="${film.getId()}">
+        </div>
+        <div class="mb-3">
+            <label for="directorId" class="form-label">Режиссёр</label>
+            <select class="form-select" name="directorId" id="directorId">
+                <option selected>Выберете режиссёра из списка:</option>
+                <option th:each="director : ${options}"
+                        th:value="${director.getId()}" th:text="${director.getDirectorsFio()}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить режиссёра к фильму</button>
+        <button type="button" class="btn btn-secondary" onclick="window.history.back()">Назад</button>
+    </form>
+</div>
+</body>
+</html>
+
+
